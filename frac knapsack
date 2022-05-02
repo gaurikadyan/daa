@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+class knapsack{
+    public:
+    int v;
+    int w;
+    int ratio;
+};
+int main()
+{   
+    knapsack k[3];
+    int c=50,value=0,s=0;
+    k[0].v=60;
+    k[0].w=10;
+    k[1].v=100;
+    k[1].w=20;
+    k[2].v=120;
+    k[2].w=30;
+    for(int i=0;i<3;i++){
+        k[i].ratio=k[i].v/k[i].w;
+    }
+    for(int i=0;i<2;i++){
+        for(int j=i+1;j<3;j++){
+            if(k[j].ratio>k[i].ratio){
+                swap(k[j],k[i]);
+            }
+        }
+    }
+    // for(int i=0;i<3;i++)
+    //     cout<<k[i].ratio<<" ";
+
+      for (int i=0;i<3;i++) {
+        if (s+k[i].w<=c) {
+            s=s+ k[i].w;
+            value+=k[i].v;
+        }
+        else{
+            int remain=c-s;
+            value+= k[i].v*(remain/(float)k[i].w);
+            break;
+        }
+    }
+    cout<<value<<endl; 
+    
+}
